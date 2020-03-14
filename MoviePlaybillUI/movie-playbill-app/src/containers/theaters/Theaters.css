@@ -1,0 +1,14 @@
+#mapContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#theaterSelectPane {
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+#theatersMap {
+    width: 70%;
+    margin-bottom: 40px;
+}

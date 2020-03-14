@@ -1,25 +1,24 @@
 .sidenav {
     height: 100%;
     width: 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
-    /*background-color: #111;*/
-    /*background-color: #40BFBB;*/
     background-color: #B3B8E6;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
-    text-align: center;
 }
 
 .sidenav a, .sidenav .closeBtn {
     padding: 8px 8px 8px 32px;
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
     text-decoration: none;
-    font-size: 25px;
-    /*color: #818181;*/
+    font-size: 1.5rem;
     color: #3775A4;
     display: block;
     transition: 0.3s;
@@ -27,7 +26,7 @@
 }
 
 #menuOptions {
-    margin-top: 50px;
+    margin-left: -25px;
 }
 
 .sidenav a:hover {
@@ -36,8 +35,8 @@
 
 .sidenav .closeBtn {
     position: absolute;
-    top: -16px;
-    left: -21.5px;
+    top: -14.9px;
+    left: -20.9px;
     color: #F1F1F1;
-    font-size: 36px;
+    font-size: 2.25rem;
 }

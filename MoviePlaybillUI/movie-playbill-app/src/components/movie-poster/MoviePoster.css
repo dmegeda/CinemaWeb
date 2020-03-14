@@ -1,0 +1,34 @@
+.posterBox {
+    width: 220px;
+}
+
+.posterPicture {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto 1.2rem;
+}
+
+.movieTitle {
+    padding: 0 5px 0;
+    color: #fff;
+    background-color: #AF7AC5;
+    height: 90px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.posterBox a {
+    display: block;
+    text-decoration: none;
+}
+
+.posterBox:hover .posterPicture {
+    filter: brightness(0.8);
+    transition: .5s;
+}
+
+.posterBox:hover .movieTitle {
+    color: #000;
+    transition: .2s;
+}

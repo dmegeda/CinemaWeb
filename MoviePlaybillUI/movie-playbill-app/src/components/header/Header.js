@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SideMenu from "./SideMenu/SideMenu";
+import SideMenu from "./side-menu/SideMenu";
 import './Header.css';
 
 class Header extends Component {

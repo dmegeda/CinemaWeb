@@ -1,0 +1,10 @@
+.posterItem {
+    margin: 0 2.5rem 3.5rem;
+}
+
+.moviesList {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}

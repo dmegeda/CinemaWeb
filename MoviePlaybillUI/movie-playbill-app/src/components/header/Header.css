@@ -1,13 +1,11 @@
 #header {
-    /*background: #B3B8E6;*/
-    /*background: #40BFBB;*/
     background: #3775A4;
     margin-bottom: 20px;
+    display: flex;
 }
 
 #headerMenu {
     margin-left: 10px;
-    float: left;
 }
 
 #headerLogo {

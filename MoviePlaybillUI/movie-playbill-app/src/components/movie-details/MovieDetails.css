@@ -1,0 +1,42 @@
+#movieDetailsContainer {
+    display: flex;
+}
+
+#movieDetailsImage {
+    margin-left: 7vw;
+    height: 300px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+#movieDetailsData {
+    margin-left: 7vw;
+}
+
+#movieDetailsTitle {
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 20px;
+}
+
+#movieDetailsDescription {
+    width: 50%;
+}
+
+#movieGeneralDetails {
+    display: flex;
+    margin-bottom: 50px;
+}
+
+#movieGeneralDetailsNames {
+    margin-right: 90px;
+}
+
+#movieGeneralDetailsNames span {
+    font-weight: bold;
+}
+
+#movieGeneralDetails span {
+    display: block;
+}
