@@ -1,14 +1,39 @@
-#mapContainer {
-    display: flex;
-    justify-content: space-between;
-}
-
-#theaterSelectPane {
-    width: 20%;
+#showFiltersSidebarBtn {
+    display: none;
+    margin-top: -20px;
     margin-bottom: 20px;
 }
 
+#mapContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.hideablePanelContainer {
+    display: block;
+    background-color: red;
+    width: 25%;
+}
+
 #theatersMap {
-    width: 70%;
-    margin-bottom: 40px;
+    width: 75%;
+}
+
+@media (max-width: 1024px) {
+    #showFiltersSidebarBtn {
+        display: block;
+    }
+
+    #mapContainer {
+        justify-content: center;
+    }
+
+    .hideablePanelContainer {
+        display: none;
+    }
+
+    #theatersMap {
+        width: 95%;
+    }
 }

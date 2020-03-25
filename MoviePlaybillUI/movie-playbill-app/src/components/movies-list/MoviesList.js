@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MoviePoster from "../movie-poster/MoviePoster";
-import {MovieListTypes} from "../../components/movieListTypes";
+import {MovieListTypes} from "../../constants/movieListTypes";
 import './MoviesList.css'
 
 class MoviesList extends Component {
@@ -66,12 +66,13 @@ class MoviesList extends Component {
     }
 
     render() {
+        const incomingClass = this.props.className ? this.props.className + " " : "";
         if(this.state.movieLoadError)
         {
             return <div>Йой! Щось пішло не так...</div>
         }
         return (
-            <div className={this.props.className + " moviesList"}>
+            <div className={incomingClass + "moviesList"}>
                 {
                     this.state.movies.map((moviePoster) => {
                         return (

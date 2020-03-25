@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, Switch, BrowserRouter as Router} from 'react-router-dom'
+import {Route, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import './index.css';
 import Home from "./containers/home/Home";
 import NowPage from "./containers/now-page/NowPage";
@@ -9,20 +9,24 @@ import ErrorPage from "./containers/error-page/ErrorPage";
 import Theaters from "./containers/theaters/Theaters";
 import Header from "./components/header/Header";
 import MovieInfo from "./containers/movie-info/MovieInfo";
-
-ReactDOM.render(<Header/>, document.getElementById("head"));
-ReactDOM.render(<Home/>, document.getElementById("root"));
+import Footer from "./components/footer/Footer";
+import PageContent from "./components/page-content/PageContent";
 
 ReactDOM.render(
     <Router>
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/now" component={NowPage} />
-            <Route path="/soon" component={SoonPage} />
-            <Route path="/theaters" component={Theaters} />
-            <Route path="/movies/:id" component={MovieInfo} />
-            <Route path="/" component={ErrorPage} />
-        </Switch>
+        <Header />
+        <PageContent>
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home"><Redirect to="/" /></Route>
+                <Route exact path="/now" component={NowPage} />
+                <Route exact path="/soon" component={SoonPage} />
+                <Route exact path="/theaters" component={Theaters} />
+                <Route exact path="/movies/:id" component={MovieInfo} />
+                <Route component={ErrorPage} />
+            </Switch>
+        </PageContent>
+        <Footer />
     </Router>,
     document.getElementById("root")
 );

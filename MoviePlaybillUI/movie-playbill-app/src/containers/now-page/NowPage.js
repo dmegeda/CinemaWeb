@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MoviesList from "../../components/movies-list/MoviesList";
-import {MovieListTypes} from "../../components/movieListTypes";
+import {MovieListTypes} from "../../constants/movieListTypes";
 
 class NowPage extends Component {
     render() {
