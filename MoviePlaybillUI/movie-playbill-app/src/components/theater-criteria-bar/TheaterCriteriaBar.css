@@ -1,6 +1,8 @@
 .theaterCriteriaPanel {
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .theaterCriteriaPanel ul {
@@ -17,14 +19,6 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    /*border-right: #566573 1px solid;*/
-    /*border-top: #566573 1px solid;*/
-    /*border-radius: 2px;*/
-}
-
-#searchCriteria div {
-    /*border-bottom: #566573 1px solid;*/
-    padding: 10px 30px 0 10px;
 }
 
 .criteriaSectionName {
@@ -40,9 +34,10 @@
     border-radius: 6px;
     font-weight: bold;
     color: #3775A4;
-    width: 13vw;
+    width: 50%;
     height: 40px;
-    margin: 0 auto 10px;
+    display: block;
+    /*margin: 0 auto 10px;*/
     background-color: #FFF;
 }
 
@@ -50,4 +45,8 @@
     background-color: #3775A4;
     color: #FFF;
     transition: .2s;
+}
+
+.centerBtn {
+    margin: 0 auto 10px;
 }

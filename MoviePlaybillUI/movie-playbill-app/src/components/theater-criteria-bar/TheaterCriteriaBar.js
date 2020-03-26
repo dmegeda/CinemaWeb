@@ -248,7 +248,7 @@ class TheaterCriteriaBar extends Component {
                         </ul>
                     </div>
                 </div>
-                <button type="button" id="searchBtn" onClick={this.searchButtonClick}>Пошук</button>
+                <button type="button" id="searchBtn" className={this.props.buttonCentered ? "centerBtn" : ""} onClick={this.searchButtonClick}>Пошук</button>
             </div>
         )
     }

@@ -7,6 +7,7 @@ class TheatersMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            apiKey: "AIzaSyDEF0JPX_3WUjbDCoueiPccgVlH5NP8MYA",
             mapDefaultCenter: null,
             mapDefaultZoom: null,
             theatersInfo: []
@@ -22,6 +23,12 @@ class TheatersMap extends Component {
             mapDefaultCenter: nextProps.defaultCenter,
             mapDefaultZoom: nextProps.defaultZoom,
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return !(this.state.theatersInfo === nextState.theatersInfo &&
+            this.state.mapDefaultCenter === nextState.mapDefaultCenter &&
+            this.state.mapDefaultZoom === nextState.mapDefaultZoom);
     }
 
     // changeMarkersInState(newMarkers) {
@@ -44,7 +51,7 @@ class TheatersMap extends Component {
         const MapComponent = compose(
             withProps({
                 googleMapURL:
-                    "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEF0JPX_3WUjbDCoueiPccgVlH5NP8MYA&v=3.exp&libraries=geometry,drawing,places",
+                    `https://maps.googleapis.com/maps/api/js?key=${this.state.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
                 loadingElement: <div style={{ height: `100%` }} />,
                 containerElement: <div style={{ height: `700px` }} />,
                 mapElement: <div style={{ height: `100%` }} />

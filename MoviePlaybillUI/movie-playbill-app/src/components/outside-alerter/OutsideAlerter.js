@@ -12,11 +12,11 @@ class OutsideAlerter extends Component {
     }
 
     componentDidMount() {
-        // document.addEventListener('mousedown', this.handleClickOutside);
+        document.addEventListener('mouseup', this.handleClickOutside);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
+        document.removeEventListener('mouseup', this.handleClickOutside);
     }
 
     setWrapperRef(node) {
@@ -25,7 +25,8 @@ class OutsideAlerter extends Component {
 
     handleClickOutside(event) {
         if (this.state.shouldListen && this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-            alert('You clicked outside of me!');
+            this.wrapperRef.style.display = "none";
+            this.props.onClickOutside();
         }
     }
 

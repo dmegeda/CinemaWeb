@@ -10,7 +10,7 @@ class SideMenu extends Component {
     }
 
     closeNavigation() {
-        document.getElementsByTagName("BODY")[0].style.overflow = "visible";
+        document.getElementsByTagName("BODY")[0].style.overflow = "auto";
         document.getElementById("sidenavMenu").style.width = "0";
     }
 

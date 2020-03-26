@@ -14,7 +14,9 @@ class Theaters extends Component {
             mapZoom: 0
         };
 
+        this.hideSidePanel = this.hideSidePanel.bind(this);
         this.updateMapData = this.updateMapData.bind(this);
+        this.updateMapDataFromHideablePanel = this.updateMapDataFromHideablePanel.bind(this);
         this.onShowFiltersSidebarBtnClick = this.onShowFiltersSidebarBtnClick.bind(this);
     }
 
@@ -58,23 +60,22 @@ class Theaters extends Component {
             mapZoom: mapZoom
         });
 
-        window.addEventListener('resize', function() {
-            // if(window.innerWidth > 1024) {
-            //     const panel = document.getElementsByClassName("hideablePanelContainer")[0];
-            //
-            // }
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 1024 && this.state.isFilterSidebarShown) {
+                this.hideSidePanel();
+                this.setState({isFilterSidebarShown: false})
+            }
         });
+    }
+
+    hideSidePanel() {
+        document.getElementsByClassName("hideablePanelContainer")[0].style.display = "none";
+        this.setState({isFilterSidebarShown: false});
     }
 
     updateMapData(selectedOptions) {
         //send options to server, get theaters and save them to the state
         //JSON.stringify
-
-        // if(this.state.isFilterSidebarShown) {
-        //     this.setState({isFilterSidebarShown: !this.state.isFilterSidebarShown});
-        //     document.getElementById("theaterSelectPanel").style.display = "none";
-        //     document.getElementById("theatersMap").style.display = "block";
-        // }
 
         const dataFromServer = {
             theaters: [
@@ -104,26 +105,19 @@ class Theaters extends Component {
             suitableTheaters: theaters,
             mapCenter: mapCenter,
             mapZoom: mapZoom
-        })
+        });
+    }
+
+    updateMapDataFromHideablePanel(selectedOptions) {
+        this.updateMapData(selectedOptions);
+        this.hideSidePanel();
     }
 
     onShowFiltersSidebarBtnClick() {
-        this.setState({isFilterSidebarShown: !this.state.isFilterSidebarShown}, () => {
-            if(this.state.isFilterSidebarShown) {
-                const panel = document.getElementsByClassName("hideablePanelContainer")[0];
-                document.getElementsByTagName("BODY")[0].style.overflowY = "none";
-                panel.style.display = "block";
-                panel.style.height = "80vh";
-                panel.style.position = "absolute";
-                panel.style.overflowY = "scroll";
-                panel.style.zIndex = "100";
-            }
-            else {
-                document.getElementsByClassName("hideablePanelContainer")[0].style.display = "none";
-                // document.getElementById("theatersMap").style.display = "block";
-                document.getElementById("mapContainer").style.justifyContent = "center";
-            }
-        });
+        if(!this.state.isFilterSidebarShown) {
+            this.setState({isFilterSidebarShown: true});
+            document.getElementsByClassName("hideablePanelContainer")[0].style.display = "block";
+        }
     }
 
     render() {
@@ -133,9 +127,11 @@ class Theaters extends Component {
                 <h2 className="pageSectionCaption">Кінотеатри</h2>
                 <button id="showFiltersSidebarBtn" onClick={this.onShowFiltersSidebarBtnClick}>Фільтри</button>
                 <div id="mapContainer">
-                    <OutsideAlerter className="hideablePanelContainer" shouldBeActive={this.state.isFilterSidebarShown}>
-                        <TheaterCriteriaBar id="theaterSelectPanel" updateData={this.updateMapData}/>
+                    <OutsideAlerter className="hideablePanelContainer" shouldBeActive={this.state.isFilterSidebarShown}
+                                    onClickOutside={this.hideSidePanel}>
+                        <TheaterCriteriaBar id="hideableTheaterSelectPanel" updateData={this.updateMapDataFromHideablePanel} buttonCentered />
                     </OutsideAlerter>
+                    <TheaterCriteriaBar id="theaterSelectPanel" updateData={this.updateMapData}/>
                     <TheatersMap id="theatersMap" markers={suitableTheaters} defaultCenter={mapCenter} defaultZoom={mapZoom}/>
                 </div>
             </div>

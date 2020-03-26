@@ -1,7 +1,31 @@
 #showFiltersSidebarBtn {
     display: none;
-    margin-top: -20px;
-    margin-bottom: 20px;
+    margin: -20px 0 10px;
+    outline: none;
+    border: 1px solid #3775A4;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #3775A4;
+    width: 120px;
+    height: 40px;
+    background-color: #FFF;
+}
+
+#showFiltersSidebarBtn:hover {
+    background-color: #3775A4;
+    color: #FFF;
+    transition: .2s;
+}
+
+.hideablePanelContainer {
+    display: none;
+    position: absolute;
+    height: 600px;
+    width: 300px;
+    margin-top: -1px;
+    overflow-y: auto;
+    z-index: 100;
+    background: #B3B8E6;
 }
 
 #mapContainer {
@@ -10,9 +34,8 @@
     margin-bottom: 20px;
 }
 
-.hideablePanelContainer {
+#theaterSelectPanel {
     display: block;
-    background-color: red;
     width: 25%;
 }
 
@@ -25,15 +48,12 @@
         display: block;
     }
 
-    #mapContainer {
-        justify-content: center;
-    }
-
-    .hideablePanelContainer {
+    #theaterSelectPanel {
         display: none;
     }
 
     #theatersMap {
-        width: 95%;
+        width: 100%;
+        margin: 0 auto;
     }
 }
