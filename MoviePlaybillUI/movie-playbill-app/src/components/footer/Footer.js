@@ -3,9 +3,7 @@ import './Footer.css';
 
 class Footer extends Component {
     render() {
-        // const incomingClass = this.props.className ? this.props.className + " " : "";
         return (
-            /*<div id="footerContainer" className={incomingClass}>*/
             <div id="footerContainer">
                 <div id="siteMap" className="footerSection">
                     <span className="footerSectionTitle">Карта сайту</span>
