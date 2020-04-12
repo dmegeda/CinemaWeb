@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ErrorPage extends Component {
+class NotFoundPage extends Component {
     render() {
         return (
             <React.Fragment>
@@ -11,4 +11,4 @@ class ErrorPage extends Component {
     }
 }
 
-export default ErrorPage;
+export default NotFoundPage;

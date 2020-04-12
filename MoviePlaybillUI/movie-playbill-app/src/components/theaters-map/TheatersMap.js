@@ -2,19 +2,15 @@ import React, {Component} from "react";
 import {compose, withProps} from "recompose";
 import {withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps";
 import TheaterMapMarker from "../theater-map-marker/TheaterMapMarker";
+import {GOOGLE_MAPS_API_KEY} from "../../constants/apiKeys";
 
 class TheatersMap extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            apiKey: "AIzaSyDEF0JPX_3WUjbDCoueiPccgVlH5NP8MYA",
-            mapDefaultCenter: null,
-            mapDefaultZoom: null,
-            theatersInfo: []
-        };
 
-        //this.renderMarkers = this.renderMarkers.bind(this);
-    }
+    state = {
+        mapDefaultCenter: null,
+        mapDefaultZoom: null,
+        theatersInfo: []
+    };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         return {
@@ -51,9 +47,9 @@ class TheatersMap extends Component {
         const MapComponent = compose(
             withProps({
                 googleMapURL:
-                    `https://maps.googleapis.com/maps/api/js?key=${this.state.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
+                    `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
                 loadingElement: <div style={{ height: `100%` }} />,
-                containerElement: <div style={{ height: `700px` }} />,
+                containerElement: <div style={{ height: `100%` }} />,
                 mapElement: <div style={{ height: `100%` }} />
             }),
             withScriptjs,
@@ -72,7 +68,6 @@ class TheatersMap extends Component {
                     this.state.theatersInfo.map((theater) => {
                         return (
                             <TheaterMapMarker position={theater.coords} link={theater.siteUrl}/>
-                            /*<TheaterMapMarker position={theater} />*/
                         )
                     })
                 }

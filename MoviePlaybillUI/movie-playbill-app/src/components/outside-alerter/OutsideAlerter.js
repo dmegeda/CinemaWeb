@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 
 class OutsideAlerter extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            shouldListen: false
-        };
 
-        this.setWrapperRef = this.setWrapperRef.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
-    }
+    state = {
+        shouldListen: false
+    };
 
     componentDidMount() {
         document.addEventListener('mouseup', this.handleClickOutside);
@@ -19,16 +14,16 @@ class OutsideAlerter extends Component {
         document.removeEventListener('mouseup', this.handleClickOutside);
     }
 
-    setWrapperRef(node) {
+    setWrapperRef = (node) => {
         this.wrapperRef = node;
-    }
+    };
 
-    handleClickOutside(event) {
+    handleClickOutside = (event) => {
         if (this.state.shouldListen && this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.wrapperRef.style.display = "none";
             this.props.onClickOutside();
         }
-    }
+    };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         return {

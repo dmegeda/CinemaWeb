@@ -7,7 +7,7 @@ import {store} from './store'
 import Home from "./containers/home/Home";
 import NowPage from "./containers/now-page/NowPage";
 import SoonPage from "./containers/soon-page/SoonPage";
-import ErrorPage from "./containers/error-page/ErrorPage";
+import NotFoundPage from "./containers/not-found-page/NotFoundPage";
 import Theaters from "./containers/theaters/Theaters";
 import Header from "./components/header/Header";
 import MovieInfo from "./containers/movie-info/MovieInfo";
@@ -26,7 +26,7 @@ ReactDOM.render(
                     <Route exact path="/soon" component={SoonPage} />
                     <Route exact path="/theaters" component={Theaters} />
                     <Route exact path="/movies/:id" component={MovieInfo} />
-                    <Route component={ErrorPage} />
+                    <Route component={NotFoundPage} />
                 </Switch>
             </PageContent>
             <Footer />

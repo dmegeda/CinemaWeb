@@ -14,7 +14,13 @@
     transition: 0.5s;
 }
 
-.sidenav a, .sidenav .closeBtn {
+.openNavBtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.sidenav a, .sidenav .closeNavBtn {
     padding: 8px 8px 8px 32px;
     margin-bottom: 1.25em;
     text-decoration: none;
@@ -33,10 +39,11 @@
     color: #F1F1F1;
 }
 
-.sidenav .closeBtn {
+.sidenav .closeNavBtn {
     position: absolute;
     top: -14.9px;
     left: -20.9px;
     color: #F1F1F1;
     font-size: 2.25rem;
+    cursor: pointer;
 }

@@ -3,43 +3,13 @@ import './MovieDetails.css'
 
 class MovieDetails extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {movieParams: {}, movieLoadError: null};
-    }
-
-    componentDidMount() {
-        // let url = "https://localhost:44386/api/home/";
-        // fetch(url)
-        //     .then(value => value.json())
-        //     .then(value => this.setState({...value}))
-        //     .catch(err => this.setState({movieLoadError: err}));
-
-        const fetchedId = this.props.movieId;
-
-        const movie = {
-            "id": fetchedId,
-            "title": "Деяка назва " + fetchedId,
-            "description": "Деякий сюжет " + fetchedId,
-            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbcAAAFCBAMAAACA5o5yAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAElBMVEXxdJj0lrH4ucv73OX85ez97vLRIOZgAAABOUlEQVR42u3PwRQAMAwFsCpUYQRDGEL9aQbR23+JQerkmgp25eTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk9rnO9T4bw2gyRdDp5QAAAABJRU5ErkJggg==",
-            "age": "Деякий вік " + fetchedId,
-            "originalTitle": "Деяка оригінальна назва " + fetchedId,
-            "releaseDate": "Деяка дата виходу " + fetchedId,
-            "genres": "Деякі жанри " + fetchedId,
-            "duration": "Деяка тривалість " + fetchedId,
-            "starring": "Деякі актори " + fetchedId,
-        };
-
-        this.setState({movieParams: {...movie}})
-    }
-
     render() {
+        const {movieData: {image, title, age, originalTitle, releaseDate, genres, duration, starring, description}} = this.props;
         return (
             <div id="movieDetailsContainer">
-                <img id="movieDetailsImage" src={this.state.movieParams.image} alt={"Постер " + this.state.movieParams.title}/>
+                <img id="movieDetailsImage" src={image} alt={"Постер " + title}/>
                 <div id="movieDetailsData">
-                    <span id="movieDetailsTitle">{this.state.movieParams.title}</span>
+                    <span id="movieDetailsTitle">{title}</span>
                     <div id="movieGeneralDetails">
                         <div id="movieGeneralDetailsNames">
                             <span>Вік:</span>
@@ -50,16 +20,16 @@ class MovieDetails extends Component {
                             <span>В головних ролях:</span>
                         </div>
                         <div id="movieGeneralDetailsValues">
-                            <span>{this.state.movieParams.age}</span>
-                            <span>{this.state.movieParams.originalTitle}</span>
-                            <span>{this.state.movieParams.releaseDate}</span>
-                            <span>{this.state.movieParams.genres}</span>
-                            <span>{this.state.movieParams.duration}</span>
-                            <span>{this.state.movieParams.starring}</span>
+                            <span>{age}</span>
+                            <span>{originalTitle}</span>
+                            <span>{releaseDate}</span>
+                            <span>{genres}</span>
+                            <span>{duration}</span>
+                            <span>{starring}</span>
                         </div>
                     </div>
                     <div id="movieDetailsDescription">
-                        {this.state.movieParams.description}
+                        {description}
                     </div>
                 </div>
             </div>
