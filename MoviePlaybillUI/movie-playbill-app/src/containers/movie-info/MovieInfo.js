@@ -1,25 +1,33 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import MovieDetails from "../../components/movie-details/MovieDetails";
 import MockMovieInfoFetcher from "../../utils/MockMovieInfoFetcher";
+import {setMovieForDetailsActionCreator} from "../../redux/actionCreators/moviesActionCreators";
 
 class MovieInfo extends Component {
-
-    state = {
-        movie: {}
-    };
-
     componentDidMount() {
-        const movieFetcher = new MockMovieInfoFetcher();
-        this.setState({movie: movieFetcher.fetchInfo(this.props.match.params.id)})
+        this.props.setMovieToDisplay(new MockMovieInfoFetcher().fetchInfo(this.props.match.params.id))
     }
 
     render() {
         return (
             <React.Fragment>
-                <MovieDetails movieData={this.state.movie}/>
+                <MovieDetails movieData={this.props.movie}/>
             </React.Fragment>
         );
     }
 }
 
-export default MovieInfo;
+const mapStateToProps = (state) => {
+    return {
+        movie: state.movies.movieForDetails
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setMovieToDisplay: (movie) => dispatch(setMovieForDetailsActionCreator(movie))
+    }
+};
+
+export default MovieInfo = connect(mapStateToProps, mapDispatchToProps)(MovieInfo);

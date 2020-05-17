@@ -9,10 +9,10 @@ export default class MovieListFetcher {
                 url = "https://localhost:44386/api/home/";
                 break;
             case MovieListTypes.NOW_IN_THEATERS:
-                url = "https://localhost:44386/api/home/";
+                url = "https://localhost:44386/api/now/";
                 break;
             case MovieListTypes.SOON_IN_THEATERS:
-                url = "https://localhost:44386/api/home/";
+                url = "https://localhost:44386/api/soon/";
                 break;
             default:
                 url = "https://localhost:44386/api/home/";

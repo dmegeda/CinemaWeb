@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {setTheatersSelectedFiltersActionCreator} from "../../redux/actionCreators/theatersActionCreators";
 import './TheaterCriteriaBar.css'
 
 class TheaterCriteriaBar extends Component {
@@ -50,23 +52,11 @@ class TheaterCriteriaBar extends Component {
         }
 
         const valueId = selectedValueName.match(/\d+/g).map(Number)[0];
-
-        // console.log(options);
-
         if (e.target.checked) {
             options.push(valueId);
         } else {
             options.splice(options.indexOf(valueId), 1);
         }
-
-        // let {selectedOptions} = this.state;
-        // if(selectedValueName.startsWith("company")) {
-        //     selectedOptions.theaterCompanies = options;
-        // }
-        // else if(selectedValueName.startsWith("movie")) {
-        //     selectedOptions.movies = options;
-        // }
-        // this.setState({selectedOptions: selectedOptions});
 
         this.setState((prevState) => {
             if(selectedValueName.startsWith("company")) {
@@ -77,31 +67,10 @@ class TheaterCriteriaBar extends Component {
             }
             return prevState;
         });
-
-        // if(selectedValueName.startsWith("company")) {
-        //     this.setState({
-        //         selectedOptions: {
-        //             theaterCompanies: options
-        //         }
-        //     });
-        // }
-        // else if(selectedValueName.startsWith("movie")) {
-        //     this.setState({
-        //         selectedOptions: {
-        //             movies: options
-        //         }
-        //     });
-        // }
     };
 
     onDistanceRadioChange = (e) => {
         const selectedValue = e.target.value;
-
-        // this.setState((prevState) => {
-        //     prevState.selectedOptions.searchZone = selectedValue;
-        //     return prevState;
-        // })
-
         this.setState({
             selectedOptions: {
                 searchZone: selectedValue
@@ -147,10 +116,10 @@ class TheaterCriteriaBar extends Component {
                         <span className="criteriaSectionName">Зона пошуку</span>
                         <ul>
                             <li>
-                                <input type="radio" value="oneNearest" defaultChecked name="distanceToTheater" onChange={this.onDistanceRadioChange}/>  Найближчий
+                                <input type="radio" value="nearest" defaultChecked name="distanceToTheater" onChange={this.onDistanceRadioChange}/>  Найближчий
                             </li>
                             <li>
-                                <input type="radio" value="allNearby" name="distanceToTheater" onChange={this.onDistanceRadioChange}/>  Поблизу
+                                <input type="radio" value="nearby" name="distanceToTheater" onChange={this.onDistanceRadioChange}/>  Поблизу
                             </li>
                             <li>
                                 <input type="radio" value="all" name="distanceToTheater" onChange={this.onDistanceRadioChange}/>  Всі
@@ -164,4 +133,19 @@ class TheaterCriteriaBar extends Component {
     }
 }
 
-export default TheaterCriteriaBar;
+const mapStateToProps = (state) => {
+    const {theaterCompanies, movies, searchZone} = state.theaters.theatersSelectedFilters;
+    return {
+        theaterCompanies,
+        movies,
+        searchZone
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSelectedOptions: (options) => dispatch(setTheatersSelectedFiltersActionCreator(options))
+    }
+};
+
+export default TheaterCriteriaBar = connect(mapStateToProps, mapDispatchToProps)(TheaterCriteriaBar);

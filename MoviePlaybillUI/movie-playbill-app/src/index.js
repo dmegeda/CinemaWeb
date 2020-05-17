@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Route, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import './index.css';
-import {store} from './store'
+import {store} from './redux/store'
 import Home from "./containers/home/Home";
 import NowPage from "./containers/now-page/NowPage";
 import SoonPage from "./containers/soon-page/SoonPage";

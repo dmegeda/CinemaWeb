@@ -13,7 +13,7 @@ class MoviesList extends Component {
                     movies.map((moviePoster) => {
                         const link = `/movies/${moviePoster.id}`;
                         return (
-                            <MoviePoster className="posterItem" {...moviePoster} link={link}/>
+                            <MoviePoster className="posterItem" {...moviePoster} link={link} key={moviePoster.id}/>
                         )
                     })
                 }
