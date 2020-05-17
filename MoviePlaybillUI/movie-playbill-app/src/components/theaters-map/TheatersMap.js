@@ -66,8 +66,9 @@ class TheatersMap extends Component {
                 defaultCenter={this.state.mapDefaultCenter}>
                 {
                     this.state.theatersInfo.map((theater) => {
+                        const key = theater.coords.lat + "/" + theater.coords.lng;
                         return (
-                            <TheaterMapMarker position={theater.coords} link={theater.siteUrl}/>
+                            <TheaterMapMarker position={theater.coords} link={theater.siteUrl} key={key}/>
                         )
                     })
                 }

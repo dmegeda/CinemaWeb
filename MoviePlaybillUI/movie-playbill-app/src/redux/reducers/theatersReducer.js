@@ -9,7 +9,7 @@ const initialState = {
     theatersSelectedFilters: {
         theaterCompanies: [],
         movies: [],
-        searchZone: ""
+        searchZone: "nearest"
     },
     theatersMapDefaultValues: {},
     isMapPageSidebarVisible: false,

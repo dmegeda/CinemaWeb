@@ -5,50 +5,18 @@ import './TheaterCriteriaBar.css'
 
 class TheaterCriteriaBar extends Component {
 
-    state = {
-        selectedOptions: {
-            theaterCompanies: [],
-            movies: [],
-            searchZone: ""
-        }
-    };
-
-    passFilters() {
-        // const coords = [
-        //     {
-        //         lat: 50.455390,
-        //         lng: 30.634826
-        //     },
-        //     {
-        //         lat: 50.445075,
-        //         lng: 30.520615
-        //     }
-        // ];
-        //this.props.updateData(coords);
-    }
-
     searchButtonClick = () => {
-        // const {theaterCompanies, movies, searchZone} = this.state.selectedOptions;
-        // console.log("theaters");
-        // for(let a in theaterCompanies) {
-        //     console.log(theaterCompanies[a]);
-        // }
-        // console.log("movies");
-        // for(let a in movies) {
-        //     console.log(movies[a]);
-        // }
-        // console.log("distance ", searchZone);
-        this.props.updateData(this.state.selectedOptions);
+        this.props.updateData();
     };
 
     onCheckboxChange = (e) => {
         let options = [];
         const selectedValueName = e.target.name;
         if(selectedValueName.startsWith("company")) {
-            options = this.state.selectedOptions.theaterCompanies;
+            options = this.props.selectedOptions.theaterCompanies;
         }
         else if(selectedValueName.startsWith("movie")) {
-            options = this.state.selectedOptions.movies;
+            options = this.props.selectedOptions.movies;
         }
 
         const valueId = selectedValueName.match(/\d+/g).map(Number)[0];
@@ -58,24 +26,21 @@ class TheaterCriteriaBar extends Component {
             options.splice(options.indexOf(valueId), 1);
         }
 
-        this.setState((prevState) => {
-            if(selectedValueName.startsWith("company")) {
-                prevState.selectedOptions.theaterCompanies = options;
-            }
-            else if(selectedValueName.startsWith("movie")) {
-                prevState.selectedOptions.movies = options;
-            }
-            return prevState;
-        });
+        let result = JSON.parse(JSON.stringify(this.props.selectedOptions));
+        if(selectedValueName.startsWith("company")) {
+            result.theaterCompanies = options;
+        }
+        else if(selectedValueName.startsWith("movie")) {
+            result.movies = options;
+        }
+        this.props.setSelectedOptions(result);
     };
 
     onDistanceRadioChange = (e) => {
         const selectedValue = e.target.value;
-        this.setState({
-            selectedOptions: {
-                searchZone: selectedValue
-            }
-        })
+        let result = JSON.parse(JSON.stringify(this.props.selectedOptions));
+        result.searchZone = selectedValue;
+        this.props.setSelectedOptions(result);
     };
 
     render() {
@@ -136,9 +101,11 @@ class TheaterCriteriaBar extends Component {
 const mapStateToProps = (state) => {
     const {theaterCompanies, movies, searchZone} = state.theaters.theatersSelectedFilters;
     return {
-        theaterCompanies,
-        movies,
-        searchZone
+        selectedOptions: {
+            theaterCompanies,
+            movies,
+            searchZone
+        }
     }
 };
 
