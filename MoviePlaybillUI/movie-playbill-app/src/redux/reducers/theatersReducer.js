@@ -3,11 +3,11 @@ import {ActionTypes} from '../actionTypes/theaters'
 const initialState = {
     mapDisplayingTheaters: [],
     theatersPossibleFilters: {
-        theaterCompanies: [],
+        theaters: [],
         movies: [],
     },
     theatersSelectedFilters: {
-        theaterCompanies: [],
+        theaters: [],
         movies: [],
         searchZone: "nearest"
     },

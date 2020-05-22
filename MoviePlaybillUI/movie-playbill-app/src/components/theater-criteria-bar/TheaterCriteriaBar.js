@@ -12,8 +12,8 @@ class TheaterCriteriaBar extends Component {
     onCheckboxChange = (e) => {
         let options = [];
         const selectedValueName = e.target.name;
-        if(selectedValueName.startsWith("company")) {
-            options = this.props.selectedOptions.theaterCompanies;
+        if(selectedValueName.startsWith("theater")) {
+            options = this.props.selectedOptions.theaters;
         }
         else if(selectedValueName.startsWith("movie")) {
             options = this.props.selectedOptions.movies;
@@ -27,8 +27,8 @@ class TheaterCriteriaBar extends Component {
         }
 
         let result = JSON.parse(JSON.stringify(this.props.selectedOptions));
-        if(selectedValueName.startsWith("company")) {
-            result.theaterCompanies = options;
+        if(selectedValueName.startsWith("theater")) {
+            result.theaters = options;
         }
         else if(selectedValueName.startsWith("movie")) {
             result.movies = options;
@@ -44,7 +44,8 @@ class TheaterCriteriaBar extends Component {
     };
 
     render() {
-        const {theaterCompanies, movies} = this.props;
+        const {filterOptions: {theaters, movies}, selectedOptions} = this.props;
+        //console.log(selectedOptions);
         const incomingClass = this.props.className ? this.props.className + " " : "";
         return (
             <div className={incomingClass + "theaterCriteriaPanel"} id={this.props.id}>
@@ -53,10 +54,10 @@ class TheaterCriteriaBar extends Component {
                         <span className="criteriaSectionName">Мережа кінотеатрів</span>
                         <ul>
                             {
-                                theaterCompanies.map(company => {
+                                theaters.map(theater => {
                                     return (
-                                        <li id={"company" + company.id} key={"company" + company.id}>
-                                            <input type="checkbox" name={"company" + company.id} onChange={this.onCheckboxChange}/>  {company.companyName}
+                                        <li id={"theater" + theater.id} key={"theater" + theater.id}>
+                                            <input type="checkbox" name={"theater" + theater.id} onChange={this.onCheckboxChange}/>  {theater.companyName}
                                         </li>
                                     )
                                 })
@@ -99,10 +100,10 @@ class TheaterCriteriaBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const {theaterCompanies, movies, searchZone} = state.theaters.theatersSelectedFilters;
+    const {theaters, movies, searchZone} = state.theaters.theatersSelectedFilters;
     return {
         selectedOptions: {
-            theaterCompanies,
+            theaters,
             movies,
             searchZone
         }

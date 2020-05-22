@@ -1,7 +1,7 @@
 export default class MockTheatersInfoFetcher {
 
     filterOptions = {
-        theaterCompanies: [
+        theaters: [
             {
                 "id": 1,
                 "companyName":"Multiplex",
@@ -55,8 +55,40 @@ export default class MockTheatersInfoFetcher {
         ]
     };
 
+    selectedOptions = {
+        theaters: [
+            {
+                "id": 2,
+                "companyName":"Планета кіно",
+            },
+            {
+                "id": 3,
+                "companyName":"Оскар",
+            }
+        ],
+        movies: [
+            {
+                id: 1,
+                title: "Фільм 1"
+            },
+            {
+                id: 2,
+                title: "Фільм 2"
+            },
+            {
+                id: 5,
+                title: "Фільм 5"
+            },
+            {
+                id: 7,
+                title: "Фільм 7"
+            }
+        ],
+        searchZone: "nearby"
+    };
+
     fetchTheatersInfo(params) {
-        let theaters = [];
+        let theaters = [], selectedFilters = {};
         if(params) {
             theaters = [
                 {
@@ -74,6 +106,7 @@ export default class MockTheatersInfoFetcher {
                     siteUrl: "https://planetakino.ua/"
                 },
             ];
+            selectedFilters = this.selectedOptions;
         }
         else {
             theaters = [
@@ -99,6 +132,11 @@ export default class MockTheatersInfoFetcher {
                     siteUrl: "https://planetakino.ua/"
                 },
             ];
+            selectedFilters = {
+                theaters: [],
+                movies: [],
+                searchZone: "nearest"
+            };
         }
         const mapCenter = {
             lat: 50.45466,
@@ -108,6 +146,7 @@ export default class MockTheatersInfoFetcher {
 
         return {
             filterOptions: this.filterOptions,
+            selectedOptions: selectedFilters,
             suitableTheaters: theaters,
             mapCenter: mapCenter,
             mapZoom: mapZoom
