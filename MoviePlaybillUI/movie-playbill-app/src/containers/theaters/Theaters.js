@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
-import {parse, stringify} from 'query-string';
+import {stringify} from 'query-string';
 import TheaterCriteriaBar from "../../components/theater-criteria-bar/TheaterCriteriaBar";
 import TheatersMap from "../../components/theaters-map/TheatersMap";
 import './Theaters.css';
@@ -34,9 +34,9 @@ class Theaters extends Component {
         this.props.setMapPageSidebarVisibility(false);
     };
 
-    updateMapData = () => {
-        const query = stringify(this.props.selectedFilters);
-        const newUrl = this.props.location.pathname + "?" + query;
+    updateMapData = (selectedOptions) => {
+        const query = "?" + stringify(selectedOptions);
+        const newUrl = this.props.location.pathname + query;
         this.props.history.replace(newUrl);
         const dataFromServer = new MockTheatersInfoFetcher().fetchTheatersInfo(query);
         const {suitableTheaters, mapCenter, mapZoom} = dataFromServer;
@@ -44,8 +44,8 @@ class Theaters extends Component {
         this.props.setMapDisplayingTheaters(suitableTheaters);
     };
 
-    updateMapDataFromHideablePanel = () => {
-        this.updateMapData();
+    updateMapDataFromHideablePanel = (selectedOptions) => {
+        this.updateMapData(selectedOptions);
         this.hideSidePanel();
     };
 

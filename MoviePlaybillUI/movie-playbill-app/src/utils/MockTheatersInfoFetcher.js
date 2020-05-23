@@ -56,35 +56,38 @@ export default class MockTheatersInfoFetcher {
     };
 
     selectedOptions = {
-        theaters: [
-            {
-                "id": 2,
-                "companyName":"Планета кіно",
-            },
-            {
-                "id": 3,
-                "companyName":"Оскар",
-            }
-        ],
-        movies: [
-            {
-                id: 1,
-                title: "Фільм 1"
-            },
-            {
-                id: 2,
-                title: "Фільм 2"
-            },
-            {
-                id: 5,
-                title: "Фільм 5"
-            },
-            {
-                id: 7,
-                title: "Фільм 7"
-            }
-        ],
+        theaters: [2, 3],
+        movies: [1, 2, 5, 7],
         searchZone: "nearby"
+        // theaters: [
+        //     {
+        //         "id": 2,
+        //         "companyName":"Планета кіно",
+        //     },
+        //     {
+        //         "id": 3,
+        //         "companyName":"Оскар",
+        //     }
+        // ],
+        // movies: [
+        //     {
+        //         id: 1,
+        //         title: "Фільм 1"
+        //     },
+        //     {
+        //         id: 2,
+        //         title: "Фільм 2"
+        //     },
+        //     {
+        //         id: 5,
+        //         title: "Фільм 5"
+        //     },
+        //     {
+        //         id: 7,
+        //         title: "Фільм 7"
+        //     }
+        // ],
+        // searchZone: "nearby"
     };
 
     fetchTheatersInfo(params) {
