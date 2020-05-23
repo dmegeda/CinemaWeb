@@ -21,13 +21,18 @@ class Theaters extends Component {
         this.props.setSelectedOptions(selectedOptions);
         this.props.setTheatersMapDefaultValues({mapCenter, mapZoom});
         this.props.setMapDisplayingTheaters(suitableTheaters);
-        window.addEventListener('resize', () => {
-            if(window.innerWidth > 1024 && this.props.isFilterSidebarShown) {
-                this.hideSidePanel();
-                this.props.setMapPageSidebarVisibility(false);
-            }
-        });
+        window.addEventListener('resize', this.resizeListener);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resizeListener);
+    }
+
+    resizeListener = () => {
+        if(window.innerWidth > 1024 && this.props.isFilterSidebarShown) {
+            this.hideSidePanel();
+        }
+    };
 
     hideSidePanel = () => {
         document.getElementsByClassName("hideablePanelContainer")[0].style.display = "none";
@@ -58,6 +63,9 @@ class Theaters extends Component {
 
     render() {
         const {filterOptions, isFilterSidebarShown, selectedFilters, suitableTheaters, mapDefaultValues: {mapCenter, mapZoom}} = this.props;
+        // console.log("render page");
+        // console.log("page options", selectedFilters);
+        // console.log("--------------------------");
         return (
             <div>
                 <h2 className="pageSectionCaption">Кінотеатри</h2>

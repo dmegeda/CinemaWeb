@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {setTheatersSelectedFiltersActionCreator} from "../../redux/actionCreators/theatersActionCreators";
 import './TheaterCriteriaBar.css'
 
 class TheaterCriteriaBar extends Component {
@@ -8,15 +6,26 @@ class TheaterCriteriaBar extends Component {
     state = {
         selectedTheaters: [],
         selectedMovies: [],
-        selectedZone: "nearest"
+        selectedZone: "nearest",
+        //dataLoaded: false
     };
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        const result = {...prevState};
-        if(nextProps.selectedOptions.theaters) result.selectedTheaters = nextProps.selectedOptions.theaters;
-        if(nextProps.selectedOptions.movies) result.selectedMovies = nextProps.selectedOptions.movies;
-        if(nextProps.selectedOptions.searchZone) result.selectedZone = nextProps.selectedOptions.searchZone;
-        return result;
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //
+    // }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        // console.log("componentWillReceiveProps");
+        let {selectedTheaters, selectedMovies, selectedZone} = this.state;
+        const {theaters, movies, searchZone} = nextProps.selectedOptions;
+        if(theaters) selectedTheaters = theaters;
+        if(movies) selectedMovies = movies;
+        if(searchZone) selectedZone = searchZone;
+        this.setState({
+            selectedTheaters,
+            selectedMovies,
+            selectedZone
+        });
     }
 
     searchButtonClick = () => {
@@ -41,15 +50,6 @@ class TheaterCriteriaBar extends Component {
             options.splice(options.indexOf(valueId), 1);
         }
 
-        // let result = JSON.parse(JSON.stringify(this.state));
-        // if(selectedValueName.startsWith("theater")) {
-        //     result.theaters = options;
-        // }
-        // else if(selectedValueName.startsWith("movie")) {
-        //     result.movies = options;
-        // }
-        // this.props.setSelectedOptions(result);
-
         if(selectedValueName.startsWith("theater")) {
             this.setState({selectedTheaters: options});
         }
@@ -60,23 +60,15 @@ class TheaterCriteriaBar extends Component {
 
     onDistanceRadioChange = (e) => {
         const selectedValue = e.target.value;
-        //console.log(selectedValue);
-        //let result = JSON.parse(JSON.stringify(this.props.selectedOptions));
-        //result.searchZone = selectedValue;
-        //this.props.setSelectedOptions(result);
         this.setState({selectedZone: selectedValue});
-        setTimeout(() => console.log(this.state), 5000);
     };
 
     render() {
-        // const {filterOptions: {theaters, movies}, selectedOptions: {theaters: selectedTheaters, movies: selectedMovies}} = this.props;
-        // let {selectedOptions: {searchZone}} = this.props;
         const {filterOptions: {theaters, movies}} = this.props;
         let {selectedTheaters, selectedMovies, selectedZone: searchZone} = this.state;
-        //console.log(searchZone);
-        // console.log("BAR PROPS!!!", this.props.selectedOptions);
-        // console.log("BAR STATE!!!", this.props.selectedOptions);
-        if(!searchZone) searchZone = this.state.selectedZone;
+        // console.log("bar render");
+        // console.log("bar state", this.state);
+        // console.log("--------------------------");
         const incomingClass = this.props.className ? this.props.className + " " : "";
         return (
             <div className={incomingClass + "theaterCriteriaPanel"} id={this.props.id}>
@@ -136,24 +128,5 @@ class TheaterCriteriaBar extends Component {
         )
     }
 }
-
-// const mapStateToProps = (state) => {
-//     const {theaters, movies, searchZone} = state.theaters.theatersSelectedFilters;
-//     return {
-//         selectedOptions: {
-//             theaters,
-//             movies,
-//             searchZone
-//         }
-//     }
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setSelectedOptions: (options) => dispatch(setTheatersSelectedFiltersActionCreator(options))
-//     }
-// };
-
-// export default TheaterCriteriaBar = connect(mapStateToProps, mapDispatchToProps)(TheaterCriteriaBar);
 
 export default TheaterCriteriaBar;
