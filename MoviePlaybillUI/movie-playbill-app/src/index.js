@@ -15,8 +15,8 @@ import Footer from "./components/footer/Footer";
 import PageContent from "./components/page-content/PageContent";
 
 ReactDOM.render(
-    <Router>
-        <Provider store={store}>
+    <Provider store={store}>
+        <Router>
             <Header />
             <PageContent>
                 <Switch>
@@ -30,7 +30,8 @@ ReactDOM.render(
                 </Switch>
             </PageContent>
             <Footer />
-        </Provider>
-    </Router>,
+        </Router>
+    </Provider>
+    ,
     document.getElementById("root")
 );
