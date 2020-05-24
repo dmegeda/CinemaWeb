@@ -28,15 +28,23 @@ class Theaters extends Component {
         window.removeEventListener('resize', this.resizeListener);
     }
 
+    setSidebarVisibility(isShown) {
+        this.props.setMapPageSidebarVisibility(isShown);
+        document.getElementsByClassName("hideablePanelContainer")[0].style.display = isShown ? "block" : "none";
+    }
+
     resizeListener = () => {
-        if(window.innerWidth > 1024 && this.props.isFilterSidebarShown) {
-            this.hideSidePanel();
+        if(window.innerWidth < 1025) {
+            this.setSidebarVisibility(false);
+        }
+        else if(window.innerWidth > 1024) {
+            this.setSidebarVisibility(false);
+            document.getElementsByClassName("hideablePanelContainer")[0].style.display = "block";
         }
     };
 
     hideSidePanel = () => {
-        document.getElementsByClassName("hideablePanelContainer")[0].style.display = "none";
-        this.props.setMapPageSidebarVisibility(false);
+        this.setSidebarVisibility(false);
     };
 
     updateMapData = (selectedOptions) => {
@@ -47,25 +55,19 @@ class Theaters extends Component {
         const {suitableTheaters, mapCenter, mapZoom} = dataFromServer;
         this.props.setTheatersMapDefaultValues({mapCenter, mapZoom});
         this.props.setMapDisplayingTheaters(suitableTheaters);
-    };
-
-    updateMapDataFromHideablePanel = (selectedOptions) => {
-        this.updateMapData(selectedOptions);
-        this.hideSidePanel();
+        if(this.props.isFilterSidebarShown) {
+            this.setSidebarVisibility(false);
+        }
     };
 
     onShowFiltersSidebarBtnClick = () => {
         if(!this.props.isFilterSidebarShown) {
-            this.props.setMapPageSidebarVisibility(true);
-            document.getElementsByClassName("hideablePanelContainer")[0].style.display = "block";
+            this.setSidebarVisibility(true);
         }
     };
 
     render() {
         const {filterOptions, isFilterSidebarShown, selectedFilters, suitableTheaters, mapDefaultValues: {mapCenter, mapZoom}} = this.props;
-        // console.log("render page");
-        // console.log("page options", selectedFilters);
-        // console.log("--------------------------");
         return (
             <div>
                 <h2 className="pageSectionCaption">Кінотеатри</h2>
@@ -73,11 +75,10 @@ class Theaters extends Component {
                 <div id="mapContainer">
                     <OutsideAlerter className="hideablePanelContainer" shouldBeActive={isFilterSidebarShown}
                                     onClickOutside={this.hideSidePanel}>
-                        <TheaterCriteriaBar id="hideableTheaterSelectPanel" updateData={this.updateMapDataFromHideablePanel}
-                                            buttonCentered filterOptions={filterOptions} selectedOptions={selectedFilters}/>
+                        <TheaterCriteriaBar id="theaterSelectPanel" updateData={this.updateMapData}
+                                            buttonCentered={isFilterSidebarShown} filterOptions={filterOptions}
+                                            selectedOptions={selectedFilters}/>
                     </OutsideAlerter>
-                    <TheaterCriteriaBar id="theaterSelectPanel" updateData={this.updateMapData} filterOptions={filterOptions}
-                                        selectedOptions={selectedFilters}/>
                     <TheatersMap id="theatersMap" markers={suitableTheaters} defaultCenter={mapCenter} defaultZoom={mapZoom}/>
                 </div>
             </div>

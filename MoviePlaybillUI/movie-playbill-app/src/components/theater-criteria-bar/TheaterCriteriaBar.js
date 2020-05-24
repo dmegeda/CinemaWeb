@@ -10,10 +10,6 @@ class TheaterCriteriaBar extends Component {
         //dataLoaded: false
     };
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //
-    // }
-
     componentWillReceiveProps(nextProps, nextContext) {
         // console.log("componentWillReceiveProps");
         let {selectedTheaters, selectedMovies, selectedZone} = this.state;
