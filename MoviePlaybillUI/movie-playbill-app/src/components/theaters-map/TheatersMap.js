@@ -27,22 +27,6 @@ class TheatersMap extends Component {
             this.state.mapDefaultZoom === nextState.mapDefaultZoom);
     }
 
-    // changeMarkersInState(newMarkers) {
-    //     this.setState({
-    //         mapDefaultCenter: this.state.mapDefaultCenter,
-    //         mapDefaultZoom: this.state.mapDefaultZoom,
-    //         theatersInfo: newMarkers
-    //     })
-    // }
-
-    // renderMarkers() {
-    //     this.state.theatersInfo.map((theater) => {
-    //         return (
-    //             <TheaterMapMarker position={theater.coords} link={theater.siteUrl}/>
-    //         )
-    //     })
-    // }
-
     render() {
         const MapComponent = compose(
             withProps({
@@ -54,12 +38,7 @@ class TheatersMap extends Component {
             }),
             withScriptjs,
             withGoogleMap
-        )(props => {
-            // const {markers} = props;
-            // if(markers) {
-            //     this.changeMarkersInState([]);
-            //     this.changeMarkersInState(markers);
-            // }
+        )(() => {
             return (
                 <GoogleMap
                 defaultZoom={this.state.mapDefaultZoom}

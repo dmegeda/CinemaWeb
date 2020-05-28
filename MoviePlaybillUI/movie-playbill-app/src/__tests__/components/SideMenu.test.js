@@ -9,3 +9,11 @@ it('Side menu shallow render', () => {
     const wrapper = shallow(<SideMenu />);
     expect(wrapper.length).toEqual(1)
 });
+
+// it("Side menu renders with close and open buttons", () => {
+//     const wrapper = shallow(<SideMenu />);
+//     const closeNavBtn = wrapper.find('.closeNavBtn');
+//     closeNavBtn.simulate('click');
+//     const menuStyle = wrapper.find('#sidenavMenu').props().style;
+//     expect(menuStyle).toHaveProperty('width', '0');
+// });

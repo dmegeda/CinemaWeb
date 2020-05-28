@@ -7,11 +7,9 @@ class TheaterCriteriaBar extends Component {
         selectedTheaters: [],
         selectedMovies: [],
         selectedZone: "nearest",
-        //dataLoaded: false
     };
 
     componentWillReceiveProps(nextProps, nextContext) {
-        // console.log("componentWillReceiveProps");
         let {selectedTheaters, selectedMovies, selectedZone} = this.state;
         const {theaters, movies, searchZone} = nextProps.selectedOptions;
         if(theaters) selectedTheaters = theaters;
@@ -62,9 +60,6 @@ class TheaterCriteriaBar extends Component {
     render() {
         const {filterOptions: {theaters, movies}} = this.props;
         let {selectedTheaters, selectedMovies, selectedZone: searchZone} = this.state;
-        // console.log("bar render");
-        // console.log("bar state", this.state);
-        // console.log("--------------------------");
         const incomingClass = this.props.className ? this.props.className + " " : "";
         return (
             <div className={incomingClass + "theaterCriteriaPanel"} id={this.props.id}>
