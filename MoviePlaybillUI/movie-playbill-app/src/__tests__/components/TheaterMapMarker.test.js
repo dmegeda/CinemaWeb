@@ -9,3 +9,11 @@ it('Theater map marker shallow render', () => {
     const wrapper = shallow(<TheaterMapMarker />);
     expect(wrapper.length).toEqual(1)
 });
+
+it('Theater page opens when click a marker', () => {
+    const fakeLink = "https://fakelink.com";
+    global.open = jest.fn();
+    const wrapper = shallow(<TheaterMapMarker link={fakeLink}/>);
+    wrapper.simulate('click');
+    expect(global.open).toBeCalled();
+});

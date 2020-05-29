@@ -7,5 +7,10 @@ configure({adapter: new Adapter()});
 
 it('Not found page shallow render', () => {
     const wrapper = shallow(<NotFoundPage />);
-    expect(wrapper.length).toEqual(1)
+    expect(wrapper.length).toEqual(1);
+});
+
+it("Not found page renders with home link", () => {
+    const wrapper = shallow(<NotFoundPage />);
+    expect(wrapper.find('a').prop('href')).toBe("/");
 });

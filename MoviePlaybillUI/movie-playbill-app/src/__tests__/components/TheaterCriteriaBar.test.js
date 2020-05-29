@@ -30,7 +30,6 @@ it('Theater criteria bar returns selected options on search button click', () =>
     const wrapper = shallow(<TheaterCriteriaBar filterOptions={mockFilterOptions} updateData={selected => postSelectedOptions = selected} />);
     wrapper.setProps({selectedOptions: preSelectedOptions});
     wrapper.find('#searchBtn').simulate('click');
-
     expect(JSON.stringify(postSelectedOptions)).toEqual(JSON.stringify(preSelectedOptions));
 });
 
