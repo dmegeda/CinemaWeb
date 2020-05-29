@@ -1,24 +1,9 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from "enzyme-adapter-react-16";
-import {render, unmountComponentAtNode} from "react-dom";
-import {act} from "@testing-library/react";
 import MovieDetails from "../../components/movie-details/MovieDetails";
 
 configure({adapter: new Adapter()});
-
-let container = null;
-
-beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-});
-
-afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-});
 
 it('Movie details shallow render', () => {
     const wrapper = shallow(<MovieDetails movieData />);
@@ -37,18 +22,15 @@ it("Movie details renders with all movie data", () => {
         starring: "Fake starring",
         description: "Fake description"
     };
-
-    act(() => {
-        render(<MovieDetails movieData={fakeMovieData} />, container);
-    });
-
-    expect(container.getElementsByTagName('img')[0].getAttribute('src')).toBe(fakeMovieData.image);
-    expect(container.innerHTML.indexOf(fakeMovieData.title)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.age)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.originalTitle)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.releaseDate)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.genres)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.duration)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.starring)).not.toBe(-1);
-    expect(container.innerHTML.indexOf(fakeMovieData.description)).not.toBe(-1);
+    const wrapper = shallow(<MovieDetails movieData={fakeMovieData} />);
+    const imageSrc = wrapper.find('img').prop('src');
+    expect(imageSrc).toBe(fakeMovieData.image);
+    expect(wrapper.text().includes(fakeMovieData.title)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.age)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.originalTitle)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.releaseDate)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.genres)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.duration)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.starring)).toBeTruthy();
+    expect(wrapper.text().includes(fakeMovieData.description)).toBeTruthy();
 });
